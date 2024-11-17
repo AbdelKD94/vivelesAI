@@ -8,6 +8,7 @@ interface WatchCardProps {
   icon: React.ReactNode;
   description: string;
   image: string;
+  link: string;
 }
 
 const WatchCard: React.FC<WatchCardProps> = ({
@@ -16,6 +17,7 @@ const WatchCard: React.FC<WatchCardProps> = ({
   icon,
   description,
   image,
+  link,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -26,7 +28,14 @@ const WatchCard: React.FC<WatchCardProps> = ({
 
   return (
     <>
-      <div className="relative h-96 w-full cursor-pointer" onClick={handleClick}>
+      <motion.div
+        className="relative h-96 w-full cursor-pointer"
+        onClick={handleClick}
+        whileHover={{ scale: 1.05 }} // Scale up on hover
+        initial={{ opacity: 0, scale: 0.8 }} // Initial state for entrance animation
+        animate={{ opacity: 1, scale: 1 }} // Final state for entrance animation
+        transition={{ duration: 0.5 }} // Transition settings
+      >
         <div
           className="w-full h-full rounded-xl shadow-lg overflow-hidden"
           style={{
@@ -49,7 +58,7 @@ const WatchCard: React.FC<WatchCardProps> = ({
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <AnimatePresence>
         {isExpanded && (
@@ -92,37 +101,18 @@ const WatchCard: React.FC<WatchCardProps> = ({
                   </div>
 
                   <div className="prose max-w-none">
-                    <h3 className="text-xl font-semibold mb-4">Contexte</h3>
-                    <p className="text-gray-600 mb-6">
-                      Le Zero Trust est un modèle de sécurité qui exige une vérification stricte de chaque personne et appareil tentant d'accéder aux ressources d'un réseau, peu importe sa position (interne ou externe au réseau).
-                    </p>
+                    <h3 className="text-xl font-semibold mb-4">Description</h3>
+                    <p className="text-gray-600 mb-6">{description}</p>
 
-                    <h3 className="text-xl font-semibold mb-4">Problématique</h3>
-                    <p className="text-gray-600 mb-6">
-                      Comment implémenter efficacement une architecture Zero Trust dans un environnement d'entreprise moderne, tout en maintenant la productivité des utilisateurs ?
-                    </p>
-
-                    <h3 className="text-xl font-semibold mb-4">Sources de Veille</h3>
-                    <ul className="list-disc pl-6 text-gray-600 mb-6">
-                      <li>Publications ANSSI</li>
-                      <li>Blog Cisco Security</li>
-                      <li>Documentation Microsoft Zero Trust</li>
-                      <li>Rapports Gartner sur la sécurité</li>
-                    </ul>
-
-                    <h3 className="text-xl font-semibold mb-4">Points Clés</h3>
-                    <ul className="list-disc pl-6 text-gray-600 mb-6">
-                      <li>Authentification multifacteur systématique</li>
-                      <li>Principe du moindre privilège</li>
-                      <li>Microsegmentation du réseau</li>
-                      <li>Chiffrement de bout en bout</li>
-                      <li>Surveillance continue des accès</li>
-                    </ul>
-
-                    <h3 className="text-xl font-semibold mb-4">Impact et Applications</h3>
-                    <p className="text-gray-600">
-                      L'adoption du Zero Trust permet de réduire significativement les risques de violations de données et améliore la posture de sécurité globale de l'organisation. Cette approche est particulièrement pertinente dans le contexte du travail à distance et des environnements cloud hybrides.
-                    </p>
+                    <h3 className="text-xl font-semibold mb-4">Lire l'article</h3>
+                    <a
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Clique ici pour lire ma Veille
+                    </a>
                   </div>
                 </div>
               </div>

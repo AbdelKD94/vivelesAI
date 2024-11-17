@@ -19,9 +19,13 @@ const CertificationCard: React.FC<CertificationCardProps> = ({
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
-    <div
+    <motion.div
       className="relative h-96 w-full perspective-1000"
       onClick={() => setIsFlipped(!isFlipped)}
+      initial={{ opacity: 0, scale: 0.8 }} // Initial state for entrance animation
+      animate={{ opacity: 1, scale: 1 }} // Final state for entrance animation
+      transition={{ duration: 0.5 }} // Transition settings
+      whileHover={{ scale: 1.05 }} // Scale up on hover
     >
       <motion.div
         className="w-full h-full relative preserve-3d cursor-pointer"
@@ -66,7 +70,7 @@ const CertificationCard: React.FC<CertificationCardProps> = ({
           </div>
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 
