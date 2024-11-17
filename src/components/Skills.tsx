@@ -1,11 +1,22 @@
 import React from 'react';
-import { Network, Shield, Server, Code, Database, Cloud, Terminal, Cpu } from 'lucide-react';
+import { Network, Shield, Server, Code, Cpu } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+// Animation pour faire apparaître le texte de manière fluide (fade-in-up)
+const fadeInUpVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: 'easeOut' }
+  }
+};
 
 const Skills = () => {
   const skills = [
     {
       category: "Réseaux",
-      icon: <Network className="w-6 h-6 text-cyan-400" />,
+      icon: <Network className="w-6 h-6" />,
       items: [
         { name: "Cisco IOS", level: 90 },
         { name: "TCP/IP", level: 85 },
@@ -15,7 +26,7 @@ const Skills = () => {
     },
     {
       category: "Sécurité",
-      icon: <Shield className="w-6 h-6 text-cyan-400" />,
+      icon: <Shield className="w-6 h-6" />,
       items: [
         { name: "Pare-feu", level: 85 },
         { name: "IDS/IPS", level: 75 },
@@ -25,7 +36,7 @@ const Skills = () => {
     },
     {
       category: "Systèmes",
-      icon: <Server className="w-6 h-6 text-cyan-400" />,
+      icon: <Server className="w-6 h-6" />,
       items: [
         { name: "Linux", level: 85 },
         { name: "Windows Server", level: 80 },
@@ -35,7 +46,7 @@ const Skills = () => {
     },
     {
       category: "Virtualisation",
-      icon: <Cpu className="w-6 h-6 text-cyan-400" />,
+      icon: <Cpu className="w-6 h-6" />,
       items: [
         { name: "VMware", level: 80 },
         { name: "Proxmox", level: 75 },
@@ -45,7 +56,7 @@ const Skills = () => {
     },
     {
       category: "Développement",
-      icon: <Code className="w-6 h-6 text-cyan-400" />,
+      icon: <Code className="w-6 h-6" />,
       items: [
         { name: "HTML/CSS", level: 85 },
         { name: "JavaScript", level: 75 },
@@ -55,41 +66,111 @@ const Skills = () => {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const progressVariants = {
+    initial: { width: 0 },
+    animate: (level: number) => ({
+      width: `${level}%`,
+      transition: {
+        duration: 1.2,
+        ease: "easeInOut",
+        delay: 0.3
+      }
+    })
+  };
+
   return (
-    <section id="skills" className="relative bg-gradient-to-br from-black via-blue-950 to-black text-white py-20">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent"></div>
-      <div className="container mx-auto px-4 relative z-10">
-        <h2 className="text-4xl font-bold mb-2 text-center bg-gradient-to-r from-blue-500 to-cyan-500 text-transparent bg-clip-text">Compétences</h2>
-        <p className="text-center text-blue-200 mb-12">Mes domaines d'expertise technique</p>
+    <section className="relative min-h-screen py-20 text-neutral-100">
+      {/* Background with reduced opacity overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 opacity-95" />
+      
+      <div className="container relative z-10 px-4 mx-auto">
+        {/* Titre animé "Mes compétences" */}
+        <motion.h2
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUpVariants}
+          className="mb-4 text-6xl font-bold text-center bg-gradient-to-r from-blue-400 to-teal-300 text-transparent bg-clip-text"
+        >
+          Mes Compétences
+        </motion.h2>
+
+        {/* Sous-titre animé */}
+        <motion.p
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUpVariants}
+          className="text-center text-blue-200 mb-16 text-xl"
+        >
+          Mes domaines d'expertise technique
+        </motion.p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto"
+        >
           {skills.map((skillGroup, index) => (
-            <div key={index} className="backdrop-blur-sm bg-blue-950/30 p-6 rounded-2xl border border-blue-500/30">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-blue-900/50 rounded-lg border border-blue-500/30">
-                  {skillGroup.icon}
+            <motion.div
+              key={index}
+              variants={cardVariants}
+              className="overflow-hidden backdrop-blur-sm bg-white/5 rounded-xl border border-white/10 p-6 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02] hover:shadow-xl"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-white/10">
+                  <div className="text-cyan-300 transition-colors duration-300 group-hover:text-cyan-200">
+                    {skillGroup.icon}
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-cyan-400">{skillGroup.category}</h3>
+                <h3 className="text-xl font-medium text-neutral-200">
+                  {skillGroup.category}
+                </h3>
               </div>
-              <div className="space-y-4">
+              
+              <div className="space-y-5">
                 {skillGroup.items.map((skill, skillIndex) => (
                   <div key={skillIndex}>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-blue-100">{skill.name}</span>
-                      <span className="text-blue-300">{skill.level}%</span>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm text-neutral-300">{skill.name}</span>
+                      <span className="text-sm text-neutral-400">{skill.level}%</span>
                     </div>
-                    <div className="h-2 bg-blue-900/50 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
+                    <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                      <motion.div
+                        variants={progressVariants}
+                        initial="initial"
+                        animate="animate"
+                        custom={skill.level}
+                        className="h-full rounded-full bg-gradient-to-r from-blue-400 to-cyan-400"
+                      />
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

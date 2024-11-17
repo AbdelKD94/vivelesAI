@@ -1,123 +1,179 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Github, Linkedin, Download } from 'lucide-react';
+import { Network, Shield, Server, Code, Cpu } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-const Contact = () => {
+// Animation pour faire apparaître le texte de manière fluide (fade-in-up)
+const fadeInUpVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: 'easeOut' }
+  }
+};
+
+const Skills = () => {
+  const skills = [
+    {
+      category: "Réseaux",
+      icon: <Network className="w-6 h-6" />,
+      items: [
+        { name: "Cisco IOS", level: 90 },
+        { name: "TCP/IP", level: 85 },
+        { name: "VLANs", level: 80 },
+        { name: "Routage & Switching", level: 85 }
+      ]
+    },
+    {
+      category: "Sécurité",
+      icon: <Shield className="w-6 h-6" />,
+      items: [
+        { name: "Pare-feu", level: 85 },
+        { name: "IDS/IPS", level: 75 },
+        { name: "VPN", level: 80 },
+        { name: "Cryptographie", level: 70 }
+      ]
+    },
+    {
+      category: "Systèmes",
+      icon: <Server className="w-6 h-6" />,
+      items: [
+        { name: "Linux", level: 85 },
+        { name: "Windows Server", level: 80 },
+        { name: "Active Directory", level: 75 },
+        { name: "PowerShell", level: 70 }
+      ]
+    },
+    {
+      category: "Virtualisation",
+      icon: <Cpu className="w-6 h-6" />,
+      items: [
+        { name: "VMware", level: 80 },
+        { name: "Proxmox", level: 75 },
+        { name: "Docker", level: 70 },
+        { name: "Kubernetes", level: 60 }
+      ]
+    },
+    {
+      category: "Développement",
+      icon: <Code className="w-6 h-6" />,
+      items: [
+        { name: "HTML/CSS", level: 85 },
+        { name: "JavaScript", level: 75 },
+        { name: "Python", level: 70 },
+        { name: "SQL", level: 80 }
+      ]
+    }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const progressVariants = {
+    initial: { width: 0 },
+    animate: (level: number) => ({
+      width: `${level}%`,
+      transition: {
+        duration: 1.2,
+        ease: "easeInOut",
+        delay: 0.3
+      }
+    })
+  };
+
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-black via-blue-950 to-black text-white">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent"></div>
-      <div className="absolute inset-0" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Cpath d='M30 30l30-30M0 60L60 0M0 0l60 60M30 30l-30 30M30 30l30 30M30 30l-30-30' stroke='%23304050' stroke-width='1' fill='none' opacity='0.1'/%3E%3C/svg%3E")`,
-        backgroundSize: '30px 30px'
-      }}></div>
+    <section className="relative min-h-screen py-20 text-neutral-100">
+      {/* Background with reduced opacity overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 opacity-95" />
       
-      <div className="relative container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold mb-2 text-center bg-gradient-to-r from-blue-500 to-cyan-500 text-transparent bg-clip-text">Contact</h2>
-          <p className="text-center text-blue-200 mb-12">N'hésitez pas à me contacter pour discuter de vos projets</p>
-          
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Contact Info */}
-            <div className="space-y-8 backdrop-blur-sm bg-blue-950/30 p-8 rounded-2xl border border-blue-500/30">
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-cyan-400">Informations</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-3 group">
-                    <div className="p-3 bg-blue-900/50 rounded-lg group-hover:bg-blue-800/50 transition-colors border border-blue-500/30">
-                      <Mail className="w-5 h-5 text-cyan-400" />
-                    </div>
-                    <span className="text-blue-100">abdelhafid@example.com</span>
-                  </div>
-                  <div className="flex items-center space-x-3 group">
-                    <div className="p-3 bg-blue-900/50 rounded-lg group-hover:bg-blue-800/50 transition-colors border border-blue-500/30">
-                      <Phone className="w-5 h-5 text-cyan-400" />
-                    </div>
-                    <span className="text-blue-100">+33 6 12 34 56 78</span>
-                  </div>
-                  <div className="flex items-center space-x-3 group">
-                    <div className="p-3 bg-blue-900/50 rounded-lg group-hover:bg-blue-800/50 transition-colors border border-blue-500/30">
-                      <MapPin className="w-5 h-5 text-cyan-400" />
-                    </div>
-                    <span className="text-blue-100">Paris, France</span>
+      <div className="container relative z-10 px-4 mx-auto">
+        {/* Titre animé "Mes compétences" */}
+        <motion.h2
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUpVariants}
+          className="mb-4 text-6xl font-bold text-center bg-gradient-to-r from-blue-400 to-teal-300 text-transparent bg-clip-text"
+        >
+          Mes Compétences
+        </motion.h2>
+
+        {/* Sous-titre animé */}
+        <motion.p
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUpVariants}
+          className="text-center text-blue-200 mb-16 text-xl"
+        >
+          Mes domaines d'expertise technique
+        </motion.p>
+        
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto"
+        >
+          {skills.map((skillGroup, index) => (
+            <motion.div
+              key={index}
+              variants={cardVariants}
+              className="overflow-hidden backdrop-blur-sm bg-white/5 rounded-xl border border-white/10 p-6 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02] hover:shadow-xl"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-white/10">
+                  <div className="text-cyan-300 transition-colors duration-300 group-hover:text-cyan-200">
+                    {skillGroup.icon}
                   </div>
                 </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-cyan-400">Réseaux Sociaux</h3>
-                <div className="flex space-x-4">
-                  <a href="#" className="p-3 bg-blue-900/50 rounded-lg hover:bg-blue-800/50 transition-all transform hover:scale-110 border border-blue-500/30">
-                    <Github className="w-5 h-5 text-cyan-400" />
-                  </a>
-                  <a href="#" className="p-3 bg-blue-900/50 rounded-lg hover:bg-blue-800/50 transition-all transform hover:scale-110 border border-blue-500/30">
-                    <Linkedin className="w-5 h-5 text-cyan-400" />
-                  </a>
-                </div>
-              </div>
-
-              <div>
-                <a
-                  href="#"
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 py-3 rounded-lg hover:from-cyan-600 hover:to-blue-600 transition-all transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25"
-                >
-                  <Download className="w-5 h-5" />
-                  <span>Télécharger mon CV</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Contact Form */}
-            <form className="backdrop-blur-sm bg-blue-950/30 p-8 rounded-2xl border border-blue-500/30 space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-1 text-blue-200">
-                  Nom complet
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="w-full px-4 py-3 bg-blue-900/50 border border-blue-500/30 rounded-lg focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent placeholder-blue-300/50 text-blue-100"
-                  required
-                  placeholder="Votre nom"
-                />
+                <h3 className="text-xl font-medium text-neutral-200">
+                  {skillGroup.category}
+                </h3>
               </div>
               
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-1 text-blue-200">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full px-4 py-3 bg-blue-900/50 border border-blue-500/30 rounded-lg focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent placeholder-blue-300/50 text-blue-100"
-                  required
-                  placeholder="votre@email.com"
-                />
+              <div className="space-y-5">
+                {skillGroup.items.map((skill, skillIndex) => (
+                  <div key={skillIndex}>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm text-neutral-300">{skill.name}</span>
+                      <span className="text-sm text-neutral-400">{skill.level}%</span>
+                    </div>
+                    <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                      <motion.div
+                        variants={progressVariants}
+                        initial="initial"
+                        animate="animate"
+                        custom={skill.level}
+                        className="h-full rounded-full bg-gradient-to-r from-blue-400 to-cyan-400"
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-1 text-blue-200">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  rows={4}
-                  className="w-full px-4 py-3 bg-blue-900/50 border border-blue-500/30 rounded-lg focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent placeholder-blue-300/50 text-blue-100"
-                  required
-                  placeholder="Votre message..."
-                ></textarea>
-              </div>
-              
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-cyan-600 hover:to-blue-600 transition-all transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25"
-              >
-                Envoyer
-              </button>
-            </form>
-          </div>
-        </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default Contact;
+export default Skills;
