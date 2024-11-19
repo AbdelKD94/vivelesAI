@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
@@ -9,7 +9,7 @@ interface WatchCardProps {
   description: string;
   image: string;
   link: string;
-  content: string; // Ajout de la prop pour le contenu de la mindmap
+  content: string;
 }
 
 const WatchCard: React.FC<WatchCardProps> = ({
@@ -33,10 +33,10 @@ const WatchCard: React.FC<WatchCardProps> = ({
       <motion.div
         className="relative h-96 w-full cursor-pointer"
         onClick={handleClick}
-        whileHover={{ scale: 1.05 }} // Scale up on hover
-        initial={{ opacity: 0, scale: 0.8 }} // Initial state for entrance animation
-        animate={{ opacity: 1, scale: 1 }} // Final state for entrance animation
-        transition={{ duration: 0.5 }} // Transition settings
+        whileHover={{ scale: 1.05 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
       >
         <div
           className="w-full h-full rounded-xl shadow-lg overflow-hidden"
@@ -106,18 +106,24 @@ const WatchCard: React.FC<WatchCardProps> = ({
                     <h3 className="text-xl font-semibold mb-4">Description</h3>
                     <p className="text-gray-600 mb-6">{description}</p>
 
-                    {/* Affichage de la mindmap */}
                     <h3 className="text-xl font-semibold mb-4">Mindmap</h3>
-                    <div dangerouslySetInnerHTML={{ __html: content }} />
+                    <div className="w-full overflow-x-auto">
+                      <div 
+                        className="min-w-full"
+                        dangerouslySetInnerHTML={{ 
+                          __html: content.replace(/class="w-screen h-screen/g, 'class="w-full h-full')
+                        }} 
+                      />
+                    </div>
 
-                    <h3 className="text-xl font-semibold mb-4">Lire l'article</h3>
+                    <h3 className="text-xl font-semibold mt-6 mb-4">Lire l'article</h3>
                     <a
                       href={link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:underline"
                     >
-                      Clique ici pour lire ma Veille
+                      Cliquez ici pour lire ma veille
                     </a>
                   </div>
                 </div>
