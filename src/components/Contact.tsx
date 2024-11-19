@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 const Contact = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
-  // IntersectionObserver pour l'animation lors du scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -27,10 +26,9 @@ const Contact = () => {
     };
   }, []);
 
-  // Variantes d'animation
   const fadeInUpVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 
   const textVariants = {
@@ -49,11 +47,12 @@ const Contact = () => {
     },
   };
 
-  const title = "Prenons Contact";
-  const subtitle = "Je suis toujours ouvert à de nouvelles opportunités et collaborations";
+  const title = 'Prenons Contact';
+  const subtitle =
+    'Je suis toujours ouvert à de nouvelles opportunités et collaborations';
 
   return (
-    <div 
+    <div
       ref={sectionRef}
       className="min-h-screen relative overflow-hidden py-20 text-white"
       style={{
@@ -68,14 +67,17 @@ const Contact = () => {
           variants={textVariants}
           className="text-center mb-16"
         >
-          <motion.h2 
+          <motion.h2
             className="text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-teal-300 text-transparent bg-clip-text"
           >
-            {title.split("").map((char, index) => (
+            {title.split('').map((char, index) => (
               <motion.span
                 key={index}
                 variants={letterVariants}
-                style={{ display: "inline-block" }}
+                style={{
+                  display: 'inline-block',
+                  marginRight: char === ' ' ? '0.5rem' : '0.2rem',
+                }}
               >
                 {char}
               </motion.span>
@@ -98,33 +100,38 @@ const Contact = () => {
             className="backdrop-blur-sm bg-white/5 p-8 rounded-2xl border border-blue-500/30 shadow-lg hover:shadow-blue-500/10 transition-all duration-300"
           >
             <div className="space-y-8">
-              {/* Infos de contact */}
               <div>
-                <h3 className="text-2xl font-semibold text-teal-300 mb-6">Coordonnées</h3>
+                <h3 className="text-2xl font-semibold text-teal-300 mb-6">
+                  Coordonnées
+                </h3>
                 <div className="space-y-6">
-                  <motion.a 
+                  <motion.a
                     whileHover={{ x: 10 }}
-                    href="mailto:abdelhafid@example.com" 
+                    href="mailto:abdelhafid.kechadpro@gmail.com"
                     className="flex items-center space-x-4 group"
                   >
                     <div className="p-3 bg-blue-900/50 rounded-lg border border-blue-500/30 group-hover:bg-blue-800/50 transition-colors">
                       <Mail className="w-5 h-5 text-teal-300" />
                     </div>
-                    <span className="text-blue-200 group-hover:text-teal-300 transition-colors">abdelhafid@example.com</span>
+                    <span className="text-blue-200 group-hover:text-teal-300 transition-colors">
+                      abdelhafid.kechadpro@gmail.com
+                    </span>
                   </motion.a>
-                  
-                  <motion.a 
+
+                  <motion.a
                     whileHover={{ x: 10 }}
-                    href="tel:+33612345678" 
+                    href="tel:+33612345678"
                     className="flex items-center space-x-4 group"
                   >
                     <div className="p-3 bg-blue-900/50 rounded-lg border border-blue-500/30 group-hover:bg-blue-800/50 transition-colors">
                       <Phone className="w-5 h-5 text-teal-300" />
                     </div>
-                    <span className="text-blue-200 group-hover:text-teal-300 transition-colors">+33 6 12 34 56 78</span>
+                    <span className="text-blue-200 group-hover:text-teal-300 transition-colors">
+                      +33 6 12 34 56 78
+                    </span>
                   </motion.a>
-                  
-                  <motion.div 
+
+                  <motion.div
                     whileHover={{ x: 10 }}
                     className="flex items-center space-x-4"
                   >
@@ -136,22 +143,23 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Réseaux sociaux */}
               <div>
-                <h3 className="text-2xl font-semibold text-teal-300 mb-6">Réseaux sociaux</h3>
+                <h3 className="text-2xl font-semibold text-teal-300 mb-6">
+                  Réseaux sociaux
+                </h3>
                 <div className="flex space-x-4">
-                  <motion.a 
+                  <motion.a
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
-                    href="#" 
+                    href="#"
                     className="p-3 bg-blue-900/50 rounded-lg border border-blue-500/30 hover:bg-blue-800/50 transition-colors"
                   >
                     <Github className="w-5 h-5 text-teal-300" />
                   </motion.a>
-                  <motion.a 
+                  <motion.a
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
-                    href="#" 
+                    href="#"
                     className="p-3 bg-blue-900/50 rounded-lg border border-blue-500/30 hover:bg-blue-800/50 transition-colors"
                   >
                     <Linkedin className="w-5 h-5 text-teal-300" />
@@ -159,7 +167,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Bouton CV */}
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -180,7 +187,10 @@ const Contact = () => {
             className="backdrop-blur-sm bg-white/5 p-8 rounded-2xl border border-blue-500/30 shadow-lg hover:shadow-blue-500/10 transition-all duration-300 space-y-6"
           >
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-blue-200 mb-2">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-blue-200 mb-2"
+              >
                 Nom complet
               </label>
               <input
@@ -191,9 +201,12 @@ const Contact = () => {
                 placeholder="Votre nom"
               />
             </div>
-            
+
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-blue-200 mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-blue-200 mb-2"
+              >
                 Email
               </label>
               <input
@@ -201,31 +214,32 @@ const Contact = () => {
                 id="email"
                 className="w-full px-4 py-3 bg-blue-900/50 border border-blue-500/30 rounded-lg focus:ring-2 focus:ring-teal-500/50 focus:border-transparent text-blue-100 placeholder-blue-300/50"
                 required
-                placeholder="votre@email.com"
+                placeholder="Votre email"
               />
             </div>
-            
+
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-blue-200 mb-2">
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-blue-200 mb-2"
+              >
                 Message
               </label>
               <textarea
                 id="message"
                 rows={4}
-                className="w-full px-4 py-3 bg-blue-900/50 border border-blue-500/30 rounded-lg focus:ring-2 focus:ring-teal-500/50 focus:border-transparent text-blue-100 placeholder-blue-300/50 resize-none"
+                className="w-full px-4 py-3 bg-blue-900/50 border border-blue-500/30 rounded-lg focus:ring-2 focus:ring-teal-500/50 focus:border-transparent text-blue-100 placeholder-blue-300/50"
                 required
-                placeholder="Votre message..."
-              ></textarea>
+                placeholder="Votre message"
+              />
             </div>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+
+            <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-teal-400 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-teal-500/25 transition-all"
+              className="w-full bg-gradient-to-r from-blue-500 to-teal-400 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-teal-500/25 transition-all"
             >
-              Envoyer le message
-            </motion.button>
+              Envoyer
+            </button>
           </motion.form>
         </div>
       </div>

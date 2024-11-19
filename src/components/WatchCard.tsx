@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
@@ -9,6 +9,7 @@ interface WatchCardProps {
   description: string;
   image: string;
   link: string;
+  content: string; // Ajout de la prop pour le contenu de la mindmap
 }
 
 const WatchCard: React.FC<WatchCardProps> = ({
@@ -18,6 +19,7 @@ const WatchCard: React.FC<WatchCardProps> = ({
   description,
   image,
   link,
+  content,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -103,6 +105,10 @@ const WatchCard: React.FC<WatchCardProps> = ({
                   <div className="prose max-w-none">
                     <h3 className="text-xl font-semibold mb-4">Description</h3>
                     <p className="text-gray-600 mb-6">{description}</p>
+
+                    {/* Affichage de la mindmap */}
+                    <h3 className="text-xl font-semibold mb-4">Mindmap</h3>
+                    <div dangerouslySetInnerHTML={{ __html: content }} />
 
                     <h3 className="text-xl font-semibold mb-4">Lire l'article</h3>
                     <a
