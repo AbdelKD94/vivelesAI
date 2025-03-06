@@ -64,6 +64,66 @@ const WatchPage = () => {
           </ul>
         </motion.div>
 
+        {/* Outils de veille */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUpVariants}
+          className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/30 mb-12"
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <Rss className="w-8 h-8 text-teal-300" />
+            <h2 className="text-2xl font-semibold text-teal-300">Outils de Veille</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            <div className="bg-white/5 p-4 rounded-xl border border-blue-500/20 flex flex-col items-center hover:bg-white/10 transition-all duration-300 group">
+              <img 
+                src="https://upload.wikimedia.org/wikipedia/commons/5/56/Feedly-logo.png" 
+                alt="Feedly" 
+                className="w-12 h-12 mb-3 group-hover:scale-110 transition-transform" 
+              />
+              <span className="text-blue-200 font-medium">Feedly</span>
+              <span className="text-sm text-blue-300/80 mt-1 text-center">Agrégateur RSS</span>
+            </div>
+            <div className="bg-white/5 p-4 rounded-xl border border-blue-500/20 flex flex-col items-center hover:bg-white/10 transition-all duration-300 group">
+              <img 
+                src="https://play-lh.googleusercontent.com/bAR-n9nd5KJ9qniTr_sXlAVi9lQZc46qb5wfFv8Cct-aWcaOptFYUjz6YmGJjWpH2g" 
+                alt="Inoreader" 
+                className="w-12 h-12 mb-3 group-hover:scale-110 transition-transform" 
+              />
+              <span className="text-blue-200 font-medium">Inoreader</span>
+              <span className="text-sm text-blue-300/80 mt-1 text-center">Flux d'actualités</span>
+            </div>
+            <div className="bg-white/5 p-4 rounded-xl border border-blue-500/20 flex flex-col items-center hover:bg-white/10 transition-all duration-300 group">
+              <img 
+                src="https://www.tactee.fr/wp-content/uploads/2014/08/logo-google-alerts.png" 
+                alt="Google Alerts" 
+                className="w-12 h-12 mb-3 group-hover:scale-110 transition-transform" 
+              />
+              <span className="text-blue-200 font-medium">Google Alerts</span>
+              <span className="text-sm text-blue-300/80 mt-1 text-center">Alertes personnalisées</span>
+            </div>
+            <div className="bg-white/5 p-4 rounded-xl border border-blue-500/20 flex flex-col items-center hover:bg-white/10 transition-all duration-300 group">
+              <img 
+                src="https://www.redditstatic.com/desktop2x/img/favicon/android-icon-192x192.png" 
+                alt="Reddit" 
+                className="w-12 h-12 mb-3 group-hover:scale-110 transition-transform" 
+              />
+              <span className="text-blue-200 font-medium">Reddit</span>
+              <span className="text-sm text-blue-300/80 mt-1 text-center">Forums techniques</span>
+            </div>
+            <div className="bg-white/5 p-4 rounded-xl border border-blue-500/20 flex flex-col items-center hover:bg-white/10 transition-all duration-300 group">
+              <img 
+                src="https://www.perplexity.ai/favicon.ico" 
+                alt="Perplexity Pro" 
+                className="w-12 h-12 mb-3 group-hover:scale-110 transition-transform" 
+              />
+              <span className="text-blue-200 font-medium">Perplexity Pro</span>
+              <span className="text-sm text-blue-300/80 mt-1 text-center">IA de recherche</span>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Salons et conférences */}
         <motion.div
           initial="hidden"

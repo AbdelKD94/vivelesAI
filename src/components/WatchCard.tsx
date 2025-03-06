@@ -64,16 +64,17 @@ const WatchCard: React.FC<WatchCardProps> = ({
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/20">
-            <div className="absolute bottom-0 p-6 text-white">
+            <div className="absolute bottom-0 p-6 w-full">
               <div className="flex items-center mb-3">
                 <div className="p-2 bg-purple-600 rounded-lg mr-3">
                   {icon}
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold">{title}</h3>
-                  <p className="text-sm opacity-80">{date}</p>
+                  <h3 className="text-xl font-bold text-white">{title}</h3>
+                  <p className="text-sm text-white/80">{date}</p>
                 </div>
               </div>
+              <p className="text-white/70 mb-4">{description}</p>
             </div>
           </div>
         </div>
@@ -180,6 +181,58 @@ const WatchCard: React.FC<WatchCardProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Section Outils de Veille */}
+      <div className="mt-12 p-8 bg-gray-50 rounded-xl shadow-sm">
+        <h3 className="text-2xl font-bold text-gray-800 mb-8 text-center">Outils de Veille Technologique</h3>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
+            <img 
+              src="https://s.feedly.com/images/fx/logos/favicon-32x32.png" 
+              alt="Feedly" 
+              className="w-12 h-12 mb-3 group-hover:scale-110 transition-transform" 
+            />
+            <span className="text-gray-800 font-medium">Feedly</span>
+            <span className="text-sm text-gray-500 mt-1 text-center">Agrégateur RSS</span>
+          </div>
+          <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
+            <img 
+              src="https://www.inoreader.com/images/icons/favicon-32x32.png" 
+              alt="Inoreader" 
+              className="w-12 h-12 mb-3 group-hover:scale-110 transition-transform" 
+            />
+            <span className="text-gray-800 font-medium">Inoreader</span>
+            <span className="text-sm text-gray-500 mt-1 text-center">Flux d'actualités</span>
+          </div>
+          <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
+            <img 
+              src="https://www.gstatic.com/images/branding/product/2x/google_alerts_64dp.png" 
+              alt="Google Alerts" 
+              className="w-12 h-12 mb-3 group-hover:scale-110 transition-transform" 
+            />
+            <span className="text-gray-800 font-medium">Google Alerts</span>
+            <span className="text-sm text-gray-500 mt-1 text-center">Alertes personnalisées</span>
+          </div>
+          <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
+            <img 
+              src="https://www.redditstatic.com/desktop2x/img/favicon/android-icon-192x192.png" 
+              alt="Reddit" 
+              className="w-12 h-12 mb-3 group-hover:scale-110 transition-transform" 
+            />
+            <span className="text-gray-800 font-medium">Reddit</span>
+            <span className="text-sm text-gray-500 mt-1 text-center">Forums techniques</span>
+          </div>
+          <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
+            <img 
+              src="https://www.perplexity.ai/favicon.ico" 
+              alt="Perplexity Pro" 
+              className="w-12 h-12 mb-3 group-hover:scale-110 transition-transform" 
+            />
+            <span className="text-gray-800 font-medium">Perplexity Pro</span>
+            <span className="text-sm text-gray-500 mt-1 text-center">IA de recherche</span>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

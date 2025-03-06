@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  setCurrentPage: (page: string) => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
   return (
     <div className="min-h-screen relative bg-[#0a0a0a] text-white overflow-hidden flex items-center">
       {/* Subtle gradient background */}
@@ -66,18 +69,14 @@ const Hero: React.FC = () => {
             transition={{ delay: 0.6, duration: 0.8 }}
             className="flex flex-wrap justify-center gap-6"
           >
-            <Link
-              to="/contact"
+            <motion.button
+              onClick={() => setCurrentPage('contact')}
               className="group px-8 py-3 bg-blue-600/90 text-white font-medium rounded-lg transition-all duration-300 hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/20"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <motion.span
-                className="inline-block"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Me Contacter
-              </motion.span>
-            </Link>
+              Me Contacter
+            </motion.button>
             <a
               href="/cv_stage.pdf"
               target="_blank"

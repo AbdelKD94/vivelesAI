@@ -23,7 +23,7 @@ function App() {
     { id: 'skills', label: 'Compétences', icon: <Code className="w-5 h-5" /> },
     { id: 'projects', label: 'Projets', icon: <Layout className="w-5 h-5" /> },
     { id: 'certifications', label: 'Certifications', icon: <Award className="w-5 h-5" /> },
-    { id: 'watchpage', label: 'Mes Veilles', icon: <Rss className="w-5 h-5" /> },
+    { id: 'watchpage', label: 'Veille', icon: <Rss className="w-5 h-5" /> },
     { id: 'contact', label: 'Contact', icon: <Phone className="w-5 h-5" /> },
   ];
 
@@ -412,7 +412,7 @@ Dernière mise à jour : Novembre 2024.`;
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <Hero />;
+        return <Hero setCurrentPage={setCurrentPage} />;
       case 'education':
         return <Education />;
       case 'skills':
@@ -491,9 +491,12 @@ Dernière mise à jour : Novembre 2024.`;
                 <a href="https://www.linkedin.com/in/abdelhafid-kechad-b957b9220/" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 transform hover:scale-110">
                   <Linkedin className="w-6 h-6" />
                 </a>
-                <Link to="/" className="text-gray-400 hover:text-blue-400 transition-colors duration-200 transform hover:scale-110">
+                <button
+                  onClick={() => setCurrentPage('contact')}
+                  className="text-gray-400 hover:text-blue-400 transition-colors duration-200 transform hover:scale-110"
+                >
                   <Mail className="w-6 h-6" />
-                </Link>
+                </button>
               </div>
             </div>
           </motion.div>
