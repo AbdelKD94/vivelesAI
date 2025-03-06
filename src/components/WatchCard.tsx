@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, Edit2, Save } from 'lucide-react';
+import MdEditor from 'react-markdown-editor-lite';
+import 'react-markdown-editor-lite/lib/index.css';
 
 interface WatchCardProps {
   title: string;
@@ -10,6 +12,7 @@ interface WatchCardProps {
   image: string;
   link: string;
   content: string;
+  onUpdate?: (newContent: string) => void;
 }
 
 const WatchCard: React.FC<WatchCardProps> = ({
@@ -20,12 +23,26 @@ const WatchCard: React.FC<WatchCardProps> = ({
   image,
   link,
   content,
+  onUpdate,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedContent, setEditedContent] = useState(content);
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsExpanded(!isExpanded);
+  };
+
+  const handleSave = () => {
+    if (onUpdate) {
+      onUpdate(editedContent);
+    }
+    setIsEditing(false);
+  };
+
+  const handleEditorChange = ({ text }: { text: string }) => {
+    setEditedContent(text);
   };
 
   return (
@@ -107,14 +124,45 @@ const WatchCard: React.FC<WatchCardProps> = ({
                     <p className="text-gray-600 mb-6">{description}</p>
 
                     <h3 className="text-xl font-semibold mb-4">Mindmap</h3>
-                    <div className="w-full overflow-x-auto">
-                      <div 
-                        className="min-w-full"
-                        dangerouslySetInnerHTML={{ 
-                          __html: content.replace(/class="w-screen h-screen/g, 'class="w-full h-full')
-                        }} 
-                      />
+                    <div className="flex justify-end mb-4">
+                      <button
+                        onClick={() => setIsEditing(!isEditing)}
+                        className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                      >
+                        {isEditing ? <Save className="w-5 h-5" /> : <Edit2 className="w-5 h-5" />}
+                      </button>
                     </div>
+                    {isEditing ? (
+                      <div className="w-full h-[500px]">
+                        <MdEditor
+                          value={editedContent}
+                          onChange={handleEditorChange}
+                          renderHTML={(text) => text}
+                          config={{
+                            view: {
+                              menu: true,
+                              md: true,
+                              html: true,
+                            },
+                            canView: {
+                              menu: true,
+                              md: true,
+                              html: true,
+                              fullScreen: true,
+                            },
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-full overflow-x-auto">
+                        <div 
+                          className="min-w-full"
+                          dangerouslySetInnerHTML={{ 
+                            __html: editedContent.replace(/class="w-screen h-screen/g, 'class="w-full h-full')
+                          }} 
+                        />
+                      </div>
+                    )}
 
                     <h3 className="text-xl font-semibold mt-6 mb-4">Lire l'article</h3>
                     <a

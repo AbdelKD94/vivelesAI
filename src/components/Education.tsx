@@ -83,7 +83,7 @@ const Education = () => {
               },
               {
                 title: "Baccalauréat Général",
-                date: "2022",
+                date: "2021",
                 description: "Spécialités: Sciences économiques et sociales, histoire-géographie, géopolitique et sciences politiques, option Mathématiques."
               }
             ]}
@@ -93,6 +93,16 @@ const Education = () => {
             title="Parcours Professionnel"
             icon={<Briefcase className="w-8 h-8 text-teal-300" />}
             items={[
+              {
+                title: "Technicien Informatique",
+                date: "2025",
+                description: "So-Innov",
+                details: [
+                  "Développement Web & Infrastructure IT",
+                  "Gestion de Projet & Accompagnement en Innovation",
+                  "Transformation Digitale & Incubation de Projets"
+                ]
+              },
               {
                 title: "Technicien Informatique",
                 date: "2024",

@@ -9,7 +9,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
-      setScrolled(offset > 50);
+      setScrolled(offset > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -27,7 +27,7 @@ const Navbar = () => {
   ];
 
   const menuVariants = {
-    hidden: { opacity: 0, y: -10 },
+    hidden: { opacity: 0, y: -5 },
     visible: { opacity: 1, y: 0 },
   };
 
@@ -35,40 +35,50 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
+      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      className={`fixed w-full z-50 transition-all duration-500 ${
         scrolled 
-          ? 'bg-white/80 backdrop-blur-lg shadow-lg' 
-          : 'bg-white/0 backdrop-blur-none'
+          ? 'bg-gradient-to-r from-slate-900/95 via-indigo-900/95 to-slate-900/95 shadow-lg shadow-indigo-500/10 border-b border-indigo-200/10' 
+          : 'bg-transparent'
       }`}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-20">
+      <div className="container mx-auto px-6">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
             className="flex items-center"
           >
-            <span className={`text-2xl font-bold bg-gradient-to-r from-blue-600 to-teal-400 text-transparent bg-clip-text transition-colors duration-300`}>
+            <span className="text-xl font-semibold bg-gradient-to-r from-indigo-200 via-purple-300 to-pink-200 text-transparent bg-clip-text">
               Portfolio
             </span>
           </motion.div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item, index) => (
               <motion.a
                 key={item.name}
                 href={item.href}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="relative px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors duration-300 group rounded-lg"
+                transition={{ 
+                  delay: index * 0.1,
+                  type: "spring",
+                  stiffness: 100
+                }}
+                className={`relative px-3 py-2 text-sm font-medium text-indigo-100 hover:text-white transition-colors duration-300 rounded-md group`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {item.name}
-                <motion.span
-                  className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-teal-400 transform scale-x-0 transition-transform origin-left group-hover:scale-x-100"
-                  initial={false}
+                <span className="relative z-10">{item.name}</span>
+                <motion.div
+                  className="absolute inset-0 rounded-md bg-gradient-to-r from-indigo-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  initial={{ scale: 0 }}
+                  whileHover={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 10 }}
                 />
               </motion.a>
             ))}
@@ -78,25 +88,34 @@ const Navbar = () => {
               href="https://docs.google.com/spreadsheets/d/xxx"
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ delay: navItems.length * 0.1 }}
-              className="px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors duration-300 rounded-lg"
+              className="relative px-3 py-2 text-sm font-medium text-indigo-100 hover:text-white transition-colors duration-300 rounded-md group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Tableau de Synthèse
+              <span className="relative z-10">Tableau de Synthèse</span>
+              <motion.div
+                className="absolute inset-0 rounded-md bg-gradient-to-r from-indigo-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                initial={{ scale: 0 }}
+                whileHover={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 200, damping: 10 }}
+              />
             </motion.a>
 
             {/* CV Button */}
             <motion.a
               href="#"
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: (navItems.length + 1) * 0.1 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-teal-400 text-white px-6 py-2 rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+              className="flex items-center space-x-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-4 py-2 rounded-md shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 transition-all duration-300"
             >
               <Download className="w-4 h-4" />
-              <span>CV</span>
+              <span className="text-sm font-medium">CV</span>
             </motion.a>
           </div>
 
@@ -105,17 +124,17 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-600 hover:text-blue-600 focus:outline-none"
+            className="md:hidden p-2 rounded-md text-indigo-100 hover:text-white hover:bg-indigo-500/20 transition-colors duration-300"
           >
             <AnimatePresence mode="wait">
               <motion.div
                 key={isOpen ? 'close' : 'open'}
-                initial={{ rotate: 0 }}
-                animate={{ rotate: isOpen ? 90 : 0 }}
-                exit={{ rotate: 0 }}
+                initial={{ rotate: 0, opacity: 0 }}
+                animate={{ rotate: isOpen ? 90 : 0, opacity: 1 }}
+                exit={{ rotate: 0, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </motion.div>
             </AnimatePresence>
           </motion.button>
@@ -125,29 +144,28 @@ const Navbar = () => {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={{
-                visible: { opacity: 1, height: 'auto' },
-                hidden: { opacity: 0, height: 0 }
-              }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden bg-white/95 backdrop-blur-lg rounded-2xl mt-2 shadow-lg"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="md:hidden overflow-hidden"
             >
               <motion.div 
                 variants={menuVariants}
-                className="px-4 py-6 space-y-3"
+                initial="hidden"
+                animate="visible"
+                className="px-2 py-4 mt-2 space-y-1 bg-gradient-to-b from-slate-900/95 to-indigo-900/95 backdrop-blur-xl rounded-xl border border-indigo-200/10 shadow-lg shadow-indigo-500/10"
               >
                 {navItems.map((item, index) => (
                   <motion.a
                     key={item.name}
                     href={item.href}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.05 }}
                     onClick={() => setIsOpen(false)}
-                    className="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-300"
+                    className="block px-4 py-2 text-sm font-medium text-indigo-100 hover:text-white hover:bg-indigo-500/20 rounded-md transition-all duration-300"
+                    whileHover={{ x: 5 }}
                   >
                     {item.name}
                   </motion.a>
@@ -157,20 +175,22 @@ const Navbar = () => {
                   href="https://docs.google.com/spreadsheets/d/xxx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navItems.length * 0.1 }}
-                  className="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-300"
+                  transition={{ delay: navItems.length * 0.05 }}
+                  className="block px-4 py-2 text-sm font-medium text-indigo-100 hover:text-white hover:bg-indigo-500/20 rounded-md transition-all duration-300"
+                  whileHover={{ x: 5 }}
                 >
                   Tableau de Synthèse
                 </motion.a>
 
                 <motion.a
                   href="#"
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: (navItems.length + 1) * 0.1 }}
-                  className="block px-4 py-2 bg-gradient-to-r from-blue-600 to-teal-400 text-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+                  transition={{ delay: (navItems.length + 1) * 0.05 }}
+                  className="block px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-500 rounded-md shadow-md hover:shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 transition-all duration-300"
+                  whileHover={{ x: 5 }}
                 >
                   Télécharger CV
                 </motion.a>

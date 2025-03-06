@@ -47,7 +47,7 @@ const Contact = () => {
     },
   };
 
-  const title = 'Prenons Contact';
+  const title = 'Prenons  Contact';
   const subtitle =
     'Je suis toujours ouvert à de nouvelles opportunités et collaborations';
 

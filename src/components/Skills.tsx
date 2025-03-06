@@ -18,20 +18,20 @@ const Skills = () => {
       category: "Réseaux",
       icon: <Network className="w-6 h-6" />,
       items: [
-        { name: "Cisco IOS", level: 90 },
-        { name: "TCP/IP", level: 85 },
-        { name: "VLANs", level: 80 },
-        { name: "Routage & Switching", level: 85 }
+        { name: "DHCP", level: 60 },
+        { name: "DNS", level: 40 },
+        { name: "VLANs", level: 70 },
+        { name: "Routage & Switching", level: 75 }
       ]
     },
     {
       category: "Sécurité",
       icon: <Shield className="w-6 h-6" />,
       items: [
-        { name: "Pare-feu", level: 85 },
-        { name: "IDS/IPS", level: 75 },
-        { name: "VPN", level: 80 },
-        { name: "Cryptographie", level: 70 }
+        { name: "Pare-feu", level: 50 },
+        { name: "RGPD", level: 90 },
+        { name: "Chiffrement", level: 40 },
+        { name: "ACLs", level: 70 }
       ]
     },
     {
@@ -39,29 +39,29 @@ const Skills = () => {
       icon: <Server className="w-6 h-6" />,
       items: [
         { name: "Linux", level: 85 },
-        { name: "Windows Server", level: 80 },
-        { name: "Active Directory", level: 75 },
-        { name: "PowerShell", level: 70 }
+        { name: "Windows Server", level: 60 },
+        { name: "Active Directory", level: 70 },
+        { name: "PowerShell", level: 50 }
       ]
     },
     {
       category: "Virtualisation",
       icon: <Cpu className="w-6 h-6" />,
       items: [
-        { name: "VMware", level: 80 },
+        { name: "Virtualbox", level: 80 },
         { name: "Proxmox", level: 75 },
-        { name: "Docker", level: 70 },
-        { name: "Kubernetes", level: 60 }
+        { name: "Docker", level: 50 },
+        
       ]
     },
     {
       category: "Développement",
       icon: <Code className="w-6 h-6" />,
       items: [
-        { name: "HTML/CSS", level: 85 },
-        { name: "JavaScript", level: 75 },
-        { name: "Python", level: 70 },
-        { name: "SQL", level: 80 }
+        { name: "HTML/CSS", level: 70 },
+        { name: "JavaScript", level: 35 },
+        { name: "Python", level: 50 },
+        { name: "SQL", level: 60 }
       ]
     }
   ];
