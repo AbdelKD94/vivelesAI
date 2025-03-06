@@ -100,7 +100,7 @@ function App() {
           }
         ]
       },
-      downloadLink: "/Annexe_Tableau_de_synthèse.pdf"
+      downloadLink: "/tableau.pdf"
     },
     {
       title: "Développement Web",
